@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="mjb_pricelist_rule_advance" model="ir.ui.view">
+        <field name="name">mjb_pricelist_rule_advance</field>
+        <field name="model">product.pricelist.item</field>
+        <field name="type">form</field>
+        <field name="inherit_id" ref="product.product_pricelist_item_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='base_pricelist_id']" position="after">
+                <field name="x_use_text_formula" invisible="compute_price != 'formula'"/>
+                <field name="x_text_formula" invisible="compute_price != 'formula' or (compute_price == 'formula' and not x_use_text_formula)"/>
+            </xpath>
+            <xpath expr="//field[@name='date_start']" position="after">
+                <field name="x_advance_domain" widget="domain" options="{'model': 'product.product', 'in_dialog': True}"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>
