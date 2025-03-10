@@ -100,8 +100,8 @@ class PricelistItem(models.Model):
             sub_rule_tip = tools.format_amount(item.env, 100,
                                            item.currency_id)
             if item.x_use_text_formula and item.x_text_formula:
-                sub_rule_tip = sub_rule_tip.replace('100', self.x_text_formula.replace('price', '100'))
-                base_amount = safe_eval(self.x_text_formula, {"__builtins__": {}}, {"price": 100})
+                sub_rule_tip = sub_rule_tip.replace('100', item.x_text_formula.replace('price', '100'))
+                base_amount = safe_eval(item.x_text_formula, {"__builtins__": {}}, {"price": 100})
             discount_factor = (100 - item.price_discount) / 100
             discounted_price = base_amount * discount_factor
             if item.price_round:
